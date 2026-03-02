@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mall of Asia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ocean: #1e5f8c;
+            --sky: #4a9fd9;
+            --sand: #f9f9f9;
+            --text: #2c3e50;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: white;
+            font-size: 15px;
+            scroll-behavior: smooth;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, .95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, .05);
+            padding: .75rem 1.5rem;
+        }
+
+        .navbar-brand {
+            color: var(--ocean);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .nav-link {
+            color: var(--text);
+            border-radius: 100px;
+            font-weight: 500;
+            font-size: .9rem;
+            padding: .5rem 1.2rem;
+            margin: 0 .2rem;
+            transition: all .2s;
+        }
+
+        .nav-link.active {
+            background: var(--ocean);
+            color: white !important;
+        }
+
+        .nav-link:hover {
+            background: rgba(30, 95, 140, .08);
+            color: var(--text);
+        }
+
+        @media (max-width: 991.98px) {
+            #moaNavbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, .98);
+                backdrop-filter: blur(12px);
+                z-index: 1050;
+                padding: 1rem 0;
+            }
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--ocean);
+            font-weight: 600;
+            margin-bottom: .5rem;
+        }
+
+        h4 {
+            font-size: 1.15rem;
+            color: var(--ocean);
+            font-weight: 600;
+            margin-bottom: .8rem;
+        }
+
+        .lead {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-bottom: 2rem;
+        }
+
+        .about-img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        .attr-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+            height: 100%;
+            transition: all .25s;
+        }
+
+        .attr-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .1);
+        }
+
+        .attr-card img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .attr-card .card-body {
+            padding: 1.4rem;
+        }
+
+        .attr-card .card-title {
+            color: var(--ocean);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: .5rem;
+        }
+
+        .attr-card .card-text {
+            color: #6c757d;
+            font-size: .88rem;
+            line-height: 1.6;
+        }
+
+        .scroll-row {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--sky) #f0f0f0;
+        }
+
+        .scroll-row::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        .scroll-row::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 10px;
+        }
+
+        .scroll-row::-webkit-scrollbar-thumb {
+            background: var(--sky);
+            border-radius: 10px;
+        }
+
+        .store-card {
+            min-width: 180px;
+            max-width: 180px;
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+            transition: all .25s;
+            flex-shrink: 0;
+        }
+
+        .store-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .1);
+        }
+
+        .store-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .store-card .store-body {
+            padding: .75rem;
+            text-align: center;
+        }
+
+        .store-card .store-name {
+            font-size: .78rem;
+            font-weight: 600;
+            color: var(--ocean);
+            line-height: 1.3;
+        }
+
+        .store-card a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .store-card a:hover .store-name {
+            color: var(--sky);
+        }
+
+        .map-wrap {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .1);
+        }
+
+        .map-wrap iframe {
+            width: 100%;
+            height: 420px;
+            border: 0;
+            display: block;
+        }
+
+        footer {
+            background: #e8f4fb;
+            color: var(--text);
+            padding: 2rem 0;
+            font-size: .9rem;
+            border-top: 1px solid #cce4f4;
+        }
+
+        footer small {
+            color: #6c757d;
+            font-size: .8rem;
+        }
+
+        .section-divider {
+            border: none;
+            height: 1px;
+            background: #e9ecef;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#moaNav" data-bs-offset="80" tabindex="0">
+
+    <nav class="navbar navbar-expand-lg sticky-top" id="moaNav" style="z-index:1050;">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand mb-0">SM Mall of Asia</a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#moaNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="moaNavbar">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#attractions">Attractions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#shopping">Shopping</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#dining">Dining</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#visit-us">Visit Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="about" style="background: var(--sand);">
+        <div class="container">
+            <div class="row g-5 align-items-start">
+                <div class="col-lg-6">
+                    <img src="moa-out.jpg" alt="SM MoA" class="about-img">
+                </div>
+                <div class="col-lg-6">
+                    <h2>SM Mall of Asia</h2>
+                    <p class="text-muted mb-3" style="font-size:.9rem;">Pasay City, Metro Manila</p>
+                    <p>SM Mall of Asia, or SM MoA, is one of the biggest lifestyle destinations in the Philippines.
+                        Located along the scenic Manila Bay in Pasay City, it is known for its world-class shopping,
+                        dining, and entertainment experiences. Once the largest mall in the country, it remains one of
+                        the biggest in the world and continues to attract millions of visitors every year.</p>
+                    <p>The mall features four interconnected buildings with retail stores, restaurants, cafés, and
+                        attractions. It also offers one of the largest parking facilities in the country, accommodating
+                        around five thousand vehicles.</p>
+                    <p>Inside, visitors can enjoy the first IMAX Theatre in the Philippines, the Director's Club for
+                        premium cinema viewing, and the country's first Olympic-sized ice skating rink — also the
+                        largest in Southeast Asia.</p>
+                    <p>Just beside the mall stands the SM Mall of Asia Arena, a state-of-the-art indoor venue holding up
+                        to 20,000 people. Opened in 2012, it has hosted major sports events, concerts, and international
+                        artists. The arena was also upgraded for the 2023 FIBA Basketball World Cup.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section id="attractions">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <h2>Attractions</h2>
+                    <p class="lead">World-class entertainment and landmarks inside and around MoA.</p>
+                </div>
+            </div>
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="attr-card">
+                        <img src="imax.jpg" alt="IMAX Theatre">
+                        <div class="card-body">
+                            <h5 class="card-title">IMAX Theatre</h5>
+                            <p class="card-text">The <a href="https://www.imax.com/en/ph/theatre/sm-mall-asia-imax"
+                                    target="_blank" style="color:var(--sky); text-decoration:none;">IMAX with Laser
+                                    cinema</a> features 4K laser projection, a 24-meter screen, and advanced surround
+                                sound. Seats 479 guests plus 9 exclusive VIP seats.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="attr-card">
+                        <img src="rink.jpeg" alt="Ice Skating Rink">
+                        <div class="card-body">
+                            <h5 class="card-title">Olympic Ice Skating Rink</h5>
+                            <p class="card-text">The <a
+                                    href="https://www.smsupermalls.com/mall-directory/sm-mall-of-asia/shops/sm-skating"
+                                    target="_blank" style="color:var(--sky); text-decoration:none;">SM Skating Rink</a>
+                                spans 1,800 square meters on the third level of the Main Mall, accommodating up to 300
+                                skaters at a time.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="attr-card">
+                        <img src="globe.jpg" alt="MoA Globe">
+                        <div class="card-body">
+                            <h5 class="card-title">The MoA Globe</h5>
+                            <p class="card-text">Made of steel and LED panels, the globe comes alive at night with
+                                animated displays at the main entrance facing Manila Bay — a must-see landmark and photo
+                                spot.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6">
+                    <div class="attr-card">
+                        <img src="bay.jpeg" alt="By The Bay">
+                        <div class="card-body">
+                            <h5 class="card-title">By The Bay</h5>
+                            <p class="card-text"><a
+                                    href="https://www.smsupermalls.com/mall-directory/sm-by-the-bay/information"
+                                    target="_blank" style="color:var(--sky); text-decoration:none;">By the Bay</a> is
+                                MoA's open-air leisure and dining strip along Manila Bay, known for sunset views,
+                                amusement rides, and nightly lights-and-music displays.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="attr-card">
+                        <img src="arena.jpg" alt="MoA Arena">
+                        <div class="card-body">
+                            <h5 class="card-title">MoA Arena</h5>
+                            <p class="card-text">The <a href="https://www.mallofasia-arena.com/" target="_blank"
+                                    style="color:var(--sky); text-decoration:none;">SM Mall of Asia Arena</a> holds up
+                                to 20,000 guests and has hosted global artists, PBA, UAAP, NCAA, and the 2023 FIBA
+                                Basketball World Cup.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section id="shopping" style="background: var(--sand);">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <h2>Shopping</h2>
+                    <p class="lead">Hundreds of stores across fashion, lifestyle, and more.</p>
+                </div>
+            </div>
+            <div class="scroll-row">
+                <div class="store-card"><img src="store/tokyo.png" alt="@TOKYO">
+                    <div class="store-body"><a href="https://attokyo.com.ph/" target="_blank">
+                            <div class="store-name">@TOKYO</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/tactser.png" alt="511 TACTICAL SERIES">
+                    <div class="store-body"><a href="https://www.511tactical.com/" target="_blank">
+                            <div class="store-name">511 TACTICAL SERIES</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/acme.jpg" alt="ACME JEWELRY">
+                    <div class="store-body"><a href="https://www.acmejewelry.com.ph/" target="_blank">
+                            <div class="store-name">ACME JEWELRY</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/adidas.png" alt="ADIDAS">
+                    <div class="store-body"><a href="https://www.adidas.com.ph/" target="_blank">
+                            <div class="store-name">ADIDAS</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/aeropostale.jpg" alt="AEROPOSTALE">
+                    <div class="store-body"><a href="https://aeropostale.ph/" target="_blank">
+                            <div class="store-name">AEROPOSTALE</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/alberto.png" alt="ALBERTO">
+                    <div class="store-body"><a href="https://alberto.com.ph/" target="_blank">
+                            <div class="store-name">ALBERTO</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/aldo.png" alt="ALDO">
+                    <div class="store-body"><a href="https://aldoshoes.com.ph/" target="_blank">
+                            <div class="store-name">ALDO</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/alfredulla.png" alt="ALFREDULLA">
+                    <div class="store-body"><a href="https://alfredulla.com/" target="_blank">
+                            <div class="store-name">ALFREDULLA</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/amazfit.png" alt="AMAZFIT">
+                    <div class="store-body"><a href="https://us.amazfit.com/" target="_blank">
+                            <div class="store-name">AMAZFIT</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/american-eagle.jpg" alt="AMERICAN EAGLE">
+                    <div class="store-body"><a href="https://www.ae.com/us/en" target="_blank">
+                            <div class="store-name">AMERICAN EAGLE</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/apple-eve.png" alt="APPLE & EVE">
+                    <div class="store-body"><a href="https://apple-eve.com/" target="_blank">
+                            <div class="store-name">APPLE & EVE</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/aquaflask.png" alt="AQUAFLASK">
+                    <div class="store-body"><a href="https://aquaflask.com/" target="_blank">
+                            <div class="store-name">AQUAFLASK</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/arrow.png" alt="ARROW">
+                    <div class="store-body"><a href="https://arrow.nnnow.com/" target="_blank">
+                            <div class="store-name">ARROW</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/asprey.png" alt="ASPREY TIME">
+                    <div class="store-body"><a href="https://www.asprey.com/" target="_blank">
+                            <div class="store-name">ASPREY TIME</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/Backjoy.png" alt="BACKJOY">
+                    <div class="store-body"><a href="https://www.backjoy.com/" target="_blank">
+                            <div class="store-name">BACKJOY</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/bagelgirl.png" alt="BAGEL GIRL">
+                    <div class="store-body"><a href="https://www.facebook.com/bagelgirlph/" target="_blank">
+                            <div class="store-name">BAGEL GIRL</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/bath-body.png" alt="BATH & BODY WORKS">
+                    <div class="store-body"><a href="https://www.bathandbodyworks.ph/" target="_blank">
+                            <div class="store-name">BATH & BODY WORKS</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/bath-origins.png" alt="BATH ORIGINS">
+                    <div class="store-body"><a href="https://bathorigins.com/" target="_blank">
+                            <div class="store-name">BATH ORIGINS</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/bayo.jpg" alt="BAYO">
+                    <div class="store-body"><a href="https://bayo.com.ph/" target="_blank">
+                            <div class="store-name">BAYO</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/beabi.jpg" alt="BEABI">
+                    <div class="store-body"><a href="https://beabi.com.ph/" target="_blank">
+                            <div class="store-name">BEABI</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/beginnings.jpeg" alt="BEGINNINGS THE RING STORE">
+                    <div class="store-body">
+                        <div class="store-name">BEGINNINGS THE RING STORE</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="store/bench.png" alt="BENCH BODY">
+                    <div class="store-body"><a href="https://shop.bench.com.ph/" target="_blank">
+                            <div class="store-name">BENCH BODY</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/bershka.png" alt="BERSHKA">
+                    <div class="store-body"><a href="https://www.bershka.com/ph/" target="_blank">
+                            <div class="store-name">BERSHKA</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/beyond-the-vines.png" alt="BEYOND THE VINES">
+                    <div class="store-body"><a href="https://www.beyondthevines.ph/" target="_blank">
+                            <div class="store-name">BEYOND THE VINES</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/bike-plus.jpg" alt="BIKE PLUS">
+                    <div class="store-body"><a href="https://www.facebook.com/bikeplussmmallofasia/" target="_blank">
+                            <div class="store-name">BIKE PLUS</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/birkenstock.png" alt="BIRKENSTOCK">
+                    <div class="store-body"><a href="https://www.birkenstock.com/ph" target="_blank">
+                            <div class="store-name">BIRKENSTOCK</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/blk.png" alt="BLK COSMETICS">
+                    <div class="store-body"><a href="https://blkcosmetics.com.ph/" target="_blank">
+                            <div class="store-name">BLK COSMETICS</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/bocu.png" alt="BOCU">
+                    <div class="store-body"><a href="https://boculifestyle.com/" target="_blank">
+                            <div class="store-name">BOCU</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/butterfly-twists.png" alt="BUTTERFLY TWISTS">
+                    <div class="store-body"><a href="https://www.butterfly-twists.ph/" target="_blank">
+                            <div class="store-name">BUTTERFLY TWISTS</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/spring.png" alt="CALL IT SPRING">
+                    <div class="store-body"><a href="https://callitspring.com.ph/" target="_blank">
+                            <div class="store-name">CALL IT SPRING</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/calliope.png" alt="CALLIOPE">
+                    <div class="store-body"><a href="https://www.calliope.style/ph-en/women" target="_blank">
+                            <div class="store-name">CALLIOPE</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/casio.jpg" alt="CASIO">
+                    <div class="store-body"><a href="https://www.casio.com/ph/" target="_blank">
+                            <div class="store-name">CASIO</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/champion.png" alt="CHAMPION">
+                    <div class="store-body"><a href="https://www.champion.com/" target="_blank">
+                            <div class="store-name">CHAMPION</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/charles-keith.png" alt="CHARLES & KEITH">
+                    <div class="store-body"><a href="https://www.charleskeith.com/ph" target="_blank">
+                            <div class="store-name">CHARLES & KEITH</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/charriol.jpg" alt="CHARRIOL">
+                    <div class="store-body"><a href="https://www.charriol.com/en-ph" target="_blank">
+                            <div class="store-name">CHARRIOL</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/chaser.png" alt="CHASER">
+                    <div class="store-body"><a href="https://www.chaserbrand.com/" target="_blank">
+                            <div class="store-name">CHASER</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/chicco.png" alt="CHICCO">
+                    <div class="store-body"><a href="https://chicco.com.ph/" target="_blank">
+                            <div class="store-name">CHICCO</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/chris-sports.png" alt="CHRIS SPORTS">
+                    <div class="store-body"><a href="https://chrissports.com/" target="_blank">
+                            <div class="store-name">CHRIS SPORTS</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/christine-lhuillier.png" alt="CHRISTINE LHUILLIER">
+                    <div class="store-body"><a href="https://atelierchristinelhuillier.com/" target="_blank">
+                            <div class="store-name">CHRISTINE LHUILLIER</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/citizen.png" alt="CITIZEN">
+                    <div class="store-body"><a href="https://www.citizenwatch-global.com/" target="_blank">
+                            <div class="store-name">CITIZEN</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/ck-underwear.jpg" alt="CK UNDERWEAR">
+                    <div class="store-body"><a href="https://www.calvinklein.us/en/underwear" target="_blank">
+                            <div class="store-name">CK UNDERWEAR</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/clarks.png" alt="CLARKS">
+                    <div class="store-body"><a href="https://www.clarks.com/en-gb" target="_blank">
+                            <div class="store-name">CLARKS</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/cln.jpg" alt="CLN">
+                    <div class="store-body"><a href="https://www.cln.com.ph/" target="_blank">
+                            <div class="store-name">CLN</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/collezione.png" alt="COLLEZIONE C2">
+                    <div class="store-body"><a href="https://collezionec2.ph/" target="_blank">
+                            <div class="store-name">COLLEZIONE C2</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/cotton-on.png" alt="COTTON ON">
+                    <div class="store-body"><a href="https://cottonon.com/AU/" target="_blank">
+                            <div class="store-name">COTTON ON</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/crocs.jpg" alt="CROCS">
+                    <div class="store-body"><a href="https://crocs.com.ph/" target="_blank">
+                            <div class="store-name">CROCS</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/daniel-hechter.jpg" alt="DANIEL HECHTER">
+                    <div class="store-body"><a href="https://www.hechter.com/en_FR" target="_blank">
+                            <div class="store-name">DANIEL HECHTER</div>
+                        </a></div>
+                </div>
+                <div class="store-card"><img src="store/decathlon.png" alt="DECATHLON">
+                    <div class="store-body"><a href="https://www.decathlon.ph/" target="_blank">
+                            <div class="store-name">DECATHLON</div>
+                        </a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section id="dining">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <h2>Dining</h2>
+                    <p class="lead">From local favorites to international cuisine — something for every craving.</p>
+                </div>
+            </div>
+            <div class="scroll-row">
+                <div class="store-card"><img src="dining/8cuts.png" alt="8 CUTS BURGER BLENDS">
+                    <div class="store-body">
+                        <div class="store-name">8 CUTS BURGER BLENDS</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/almon-marina.png" alt="ALMON MARINA">
+                    <div class="store-body">
+                        <div class="store-name">ALMON MARINA</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/auntie-annes.png" alt="AUNTIE ANNES">
+                    <div class="store-body">
+                        <div class="store-name">AUNTIE ANNES</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/aveneto.jpg" alt="AVENETO PASTA AND PIZZA">
+                    <div class="store-body">
+                        <div class="store-name">AVENETO PASTA AND PIZZA</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/bacolod-chk-n-bbq.jpg" alt="BACOLOD CHK-N-BBQ HOUSE">
+                    <div class="store-body">
+                        <div class="store-name">BACOLOD CHK-N-BBQ HOUSE</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/bambu.png" alt="BAMBU DESSERTS DRINKS">
+                    <div class="store-body">
+                        <div class="store-name">BAMBU DESSERTS DRINKS</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/bangus-resto.png" alt="BANGUS RESTAURANT">
+                    <div class="store-body">
+                        <div class="store-name">BANGUS RESTAURANT</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/beard-papas.png" alt="BEARD PAPA">
+                    <div class="store-body">
+                        <div class="store-name">BEARD PAPA</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/bens-cookies.jpg" alt="BEN'S COOKIES">
+                    <div class="store-body">
+                        <div class="store-name">BEN'S COOKIES</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/bibingkinitan.jpg" alt="BIBINGKINITAN">
+                    <div class="store-body">
+                        <div class="store-name">BIBINGKINITAN</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/bistro-ravioli.png" alt="BISTRO RAVIOLI">
+                    <div class="store-body">
+                        <div class="store-name">BISTRO RAVIOLI</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/bon-banhmi.png" alt="BON BANHMI">
+                    <div class="store-body">
+                        <div class="store-name">BON BANHMI</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/bonchon.png" alt="BONCHON">
+                    <div class="store-body">
+                        <div class="store-name">BONCHON</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/botejyu.png" alt="BOTEJYU">
+                    <div class="store-body">
+                        <div class="store-name">BOTEJYU</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/breadtalk.png" alt="BREADTALK">
+                    <div class="store-body">
+                        <div class="store-name">BREADTALK</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/brownies.png" alt="BROWNIES UNLIMITED">
+                    <div class="store-body">
+                        <div class="store-name">BROWNIES UNLIMITED</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/bulgogi-brothers.jpg" alt="BULGOGI BROTHERS">
+                    <div class="store-body">
+                        <div class="store-name">BULGOGI BROTHERS</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/burger-king.png" alt="BURGER KING">
+                    <div class="store-body">
+                        <div class="store-name">BURGER KING</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/but-first-coffee.png" alt="BUT FIRST COFFEE">
+                    <div class="store-body">
+                        <div class="store-name">BUT FIRST COFFEE</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/butterboy.png" alt="BUTTERBOY">
+                    <div class="store-body">
+                        <div class="store-name">BUTTERBOY</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/butternut.jpeg" alt="BUTTERNUT BAKERY">
+                    <div class="store-body">
+                        <div class="store-name">BUTTERNUT BAKERY</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/cabalen.jpg" alt="CABALEN">
+                    <div class="store-body">
+                        <div class="store-name">CABALEN</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/cafe-adriatico.jpeg" alt="CAFE ADRIATICO">
+                    <div class="store-body">
+                        <div class="store-name">CAFE ADRIATICO</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/cafe-marygrace.jpg" alt="CAFE MARY GRACE">
+                    <div class="store-body">
+                        <div class="store-name">CAFE MARY GRACE</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/candy-corner.png" alt="CANDY CORNER">
+                    <div class="store-body">
+                        <div class="store-name">CANDY CORNER</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/caramia.png" alt="CARAMIA CAKES & GELATO">
+                    <div class="store-body">
+                        <div class="store-name">CARAMIA CAKES & GELATO</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/ricos-lechon.jpg" alt="CEBU'S BEST RICO'S LECHON">
+                    <div class="store-body">
+                        <div class="store-name">CEBU'S BEST RICO'S LECHON</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/chachago.jpg" alt="CHACHAGO">
+                    <div class="store-body">
+                        <div class="store-name">CHACHAGO</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/chapes.png" alt="CHAPES KETO CAKES">
+                    <div class="store-body">
+                        <div class="store-name">CHAPES KETO CAKES</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/chatime.png" alt="CHATIME">
+                    <div class="store-body">
+                        <div class="store-name">CHATIME</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/chatramue.png" alt="CHATRAMUE">
+                    <div class="store-body">
+                        <div class="store-name">CHATRAMUE</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/chef-tony.png" alt="CHEF TONYS POPCORN">
+                    <div class="store-body">
+                        <div class="store-name">CHEF TONY'S POPCORN</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/chilis.jpg" alt="CHILIS">
+                    <div class="store-body">
+                        <div class="store-name">CHILI'S</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/chowking.png" alt="CHOWKING">
+                    <div class="store-body">
+                        <div class="store-name">CHOWKING</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/chunky-boss.png" alt="CHUNKY BOSS">
+                    <div class="store-body">
+                        <div class="store-name">CHUNKY BOSS</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/cinnabon.png" alt="CINNABON">
+                    <div class="store-body">
+                        <div class="store-name">CINNABON</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/classic-savory.png" alt="CLASSIC SAVORY">
+                    <div class="store-body">
+                        <div class="store-name">CLASSIC SAVORY</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/cobo.png" alt="COBO TEA BEVERAGES">
+                    <div class="store-body">
+                        <div class="store-name">COBO TEA BEVERAGES</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/coco.png" alt="COCO FRESH TEA AND JUICE">
+                    <div class="store-body">
+                        <div class="store-name">COCO FRESH TEA AND JUICE</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/coldstone-creamery.jpg" alt="COLDSTONE CREAMERY">
+                    <div class="store-body">
+                        <div class="store-name">COLDSTONE CREAMERY</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/congo.jpg" alt="CONGO GRILLE">
+                    <div class="store-body">
+                        <div class="store-name">CONGO GRILLE</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/contis.jpg" alt="CONTIS BAKESHOP AND RESTAURANT">
+                    <div class="store-body">
+                        <div class="store-name">CONTIS BAKESHOP</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/dairy-queen.png" alt="DAIRY QUEEN">
+                    <div class="store-body">
+                        <div class="store-name">DAIRY QUEEN</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/davids-tea-house.png" alt="DAVIDS TEA HOUSE">
+                    <div class="store-body">
+                        <div class="store-name">DAVIDS TEA HOUSE</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/dimsum-frito.png" alt="DIMSUM FRITO">
+                    <div class="store-body">
+                        <div class="store-name">DIMSUM FRITO</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/din-tai-fung.png" alt="DIN TAI FUNG">
+                    <div class="store-body">
+                        <div class="store-name">DIN TAI FUNG</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/dohtonbori.png" alt="DOHTONBORI">
+                    <div class="store-body">
+                        <div class="store-name">DOHTONBORI</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/dong-won-garden.png" alt="DONG WON GARDEN">
+                    <div class="store-body">
+                        <div class="store-name">DONG WON GARDEN</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/dunkin.png" alt="DUNKIN">
+                    <div class="store-body">
+                        <div class="store-name">DUNKIN</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/easy-tiger.jpg" alt="EASY, TIGER">
+                    <div class="store-body">
+                        <div class="store-name">EASY, TIGER</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/el-chato.png" alt="EL CHATO MEXICAN KITCHEN">
+                    <div class="store-body">
+                        <div class="store-name">EL CHATO MEXICAN KITCHEN</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/belgian-waffles.png" alt="FAMOUS BELGIAN WAFFLES">
+                    <div class="store-body">
+                        <div class="store-name">FAMOUS BELGIAN WAFFLES</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/fiery-style.jpg" alt="FIERY STYLE">
+                    <div class="store-body">
+                        <div class="store-name">FIERY STYLE FLAMING GRILL</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/frankies.png" alt="FRANKIES NEW YORK BUFFALO WINGS">
+                    <div class="store-body">
+                        <div class="store-name">FRANKIES NY BUFFALO WINGS</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/genki-sushi.jpg" alt="GENKI SUSHI">
+                    <div class="store-body">
+                        <div class="store-name">GENKI SUSHI</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/gerrys.jpg" alt="GERRY'S RESTAURANT">
+                    <div class="store-body">
+                        <div class="store-name">GERRY'S RESTAURANT</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/goldilocks.png" alt="GOLDILOCKS">
+                    <div class="store-body">
+                        <div class="store-name">GOLDILOCKS</div>
+                    </div>
+                </div>
+                <div class="store-card"><img src="dining/gong-cha.png" alt="GONG CHA">
+                    <div class="store-body">
+                        <div class="store-name">GONG CHA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section id="visit-us" style="background: var(--sand);">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <h2>Visit Us</h2>
+                    <p class="lead">SM Mall of Asia, Pasay City, Metro Manila</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="map-wrap">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3862.1181371947987!2d120.97936357575584!3d14.535234485943421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397cbfc84288ed7%3A0xe842057d2e701f9b!2sSM%20Mall%20of%20Asia!5e0!3m2!1sen!2sph!4v1762093976025!5m2!1sen!2sph"
+                            allowfullscreen loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center">
+        <p class="mb-0">&copy; 2025 Justine Weslley. All content is for educational purposes.</p>
+        <small>Images and information © SM Supermalls. | Other images sourced online</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
