@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mall of Asia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --ocean: #1e5f8c;
@@ -15,45 +17,59 @@
             --text: #2c3e50;
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'DM Sans', sans-serif;
             color: var(--text);
             background: white;
             font-size: 15px;
             scroll-behavior: smooth;
+            margin: 0;
         }
 
+        /* ── NAVBAR ── */
         .navbar {
             background: rgba(255, 255, 255, .95);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0, 0, 0, .05);
             padding: .75rem 1.5rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1050;
+            transition: background .3s;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, .98);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, .08);
         }
 
         .navbar-brand {
             color: var(--ocean);
-            font-weight: 600;
-            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.2rem;
         }
 
         .nav-link {
             color: var(--text);
             border-radius: 100px;
             font-weight: 500;
-            font-size: .9rem;
-            padding: .5rem 1.2rem;
-            margin: 0 .2rem;
+            font-size: .85rem;
+            padding: .45rem 1.1rem;
+            margin: 0 .15rem;
             transition: all .2s;
+            letter-spacing: .02em;
         }
 
-        .nav-link.active {
+        .nav-link.active,
+        .nav-link:hover {
             background: var(--ocean);
             color: white !important;
-        }
-
-        .nav-link:hover {
-            background: rgba(30, 95, 140, .08);
-            color: var(--text);
         }
 
         @media (max-width: 991.98px) {
@@ -69,14 +85,225 @@
             }
         }
 
+        /* ── HERO ── */
+        #hero {
+            height: 100vh;
+            min-height: 600px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #0a1f30;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                url('moa-out.jpg') center/cover no-repeat;
+            transform: scale(1.05);
+            animation: heroZoom 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroZoom {
+            from {
+                transform: scale(1.05);
+            }
+
+            to {
+                transform: scale(1.12);
+            }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(160deg,
+                    rgba(10, 31, 48, .72) 0%,
+                    rgba(30, 95, 140, .55) 50%,
+                    rgba(10, 31, 48, .80) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 0 1.5rem;
+            animation: heroFadeUp .9s ease both;
+        }
+
+        @keyframes heroFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-eyebrow {
+            font-size: .78rem;
+            font-weight: 500;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .65);
+            margin-bottom: 1rem;
+            animation: heroFadeUp .9s .15s ease both;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 6rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -.02em;
+            margin-bottom: 1.25rem;
+            animation: heroFadeUp .9s .25s ease both;
+        }
+
+        .hero-title span {
+            color: var(--sky);
+        }
+
+        .hero-sub {
+            font-size: clamp(.95rem, 2vw, 1.2rem);
+            font-weight: 300;
+            color: rgba(255, 255, 255, .78);
+            max-width: 540px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.65;
+            animation: heroFadeUp .9s .35s ease both;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: .85rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: heroFadeUp .9s .45s ease both;
+        }
+
+        .btn-hero-primary {
+            background: var(--sky);
+            color: white;
+            border: none;
+            padding: .8rem 2rem;
+            border-radius: 100px;
+            font-weight: 500;
+            font-size: .9rem;
+            letter-spacing: .03em;
+            text-decoration: none;
+            transition: background .2s, transform .2s;
+        }
+
+        .btn-hero-primary:hover {
+            background: #3a8fc9;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-hero-ghost {
+            background: transparent;
+            color: white;
+            border: 1.5px solid rgba(255, 255, 255, .45);
+            padding: .8rem 2rem;
+            border-radius: 100px;
+            font-weight: 500;
+            font-size: .9rem;
+            letter-spacing: .03em;
+            text-decoration: none;
+            transition: border-color .2s, background .2s, transform .2s;
+        }
+
+        .btn-hero-ghost:hover {
+            border-color: white;
+            background: rgba(255, 255, 255, .1);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .hero-scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .4rem;
+            color: rgba(255, 255, 255, .45);
+            font-size: .72rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            animation: heroFadeUp .9s .6s ease both;
+        }
+
+        .hero-scroll-hint .arrow {
+            width: 20px;
+            height: 20px;
+            border-right: 1.5px solid rgba(255, 255, 255, .45);
+            border-bottom: 1.5px solid rgba(255, 255, 255, .45);
+            transform: rotate(45deg);
+            animation: bounce 1.6s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: rotate(45deg) translateY(0);
+            }
+
+            50% {
+                transform: rotate(45deg) translateY(5px);
+            }
+        }
+
+        /* ── STAT STRIP ── */
+        .stat-strip {
+            background: var(--ocean);
+            color: white;
+            padding: 2rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: .5rem 1rem;
+        }
+
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--sky);
+        }
+
+        .stat-label {
+            font-size: .78rem;
+            font-weight: 400;
+            opacity: .75;
+            margin-top: .3rem;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        /* ── SECTIONS ── */
         section {
-            padding: 60px 0;
+            padding: 72px 0;
         }
 
         h2 {
-            font-size: 1.8rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
             color: var(--ocean);
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: .5rem;
         }
 
@@ -88,18 +315,20 @@
         }
 
         .lead {
-            font-size: 1rem;
+            font-size: .95rem;
             color: #6c757d;
             margin-bottom: 2rem;
         }
 
         .about-img {
             width: 100%;
-            height: 420px;
+            height: 440px;
             object-fit: cover;
-            border-radius: 16px;
+            border-radius: 18px;
+            box-shadow: 0 12px 40px rgba(30, 95, 140, .15);
         }
 
+        /* ── ATTRACTION CARDS ── */
         .attr-card {
             background: white;
             border-radius: 16px;
@@ -110,8 +339,8 @@
         }
 
         .attr-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, .1);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
         }
 
         .attr-card img {
@@ -125,18 +354,20 @@
         }
 
         .attr-card .card-title {
+            font-family: 'Playfair Display', serif;
             color: var(--ocean);
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 1.05rem;
+            font-weight: 700;
             margin-bottom: .5rem;
         }
 
         .attr-card .card-text {
             color: #6c757d;
             font-size: .88rem;
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
+        /* ── SCROLL ROWS ── */
         .scroll-row {
             display: flex;
             overflow-x: auto;
@@ -161,8 +392,8 @@
         }
 
         .store-card {
-            min-width: 180px;
-            max-width: 180px;
+            min-width: 175px;
+            max-width: 175px;
             background: white;
             border-radius: 14px;
             overflow: hidden;
@@ -178,17 +409,17 @@
 
         .store-card img {
             width: 100%;
-            height: 120px;
+            height: 118px;
             object-fit: cover;
         }
 
         .store-card .store-body {
-            padding: .75rem;
+            padding: .7rem;
             text-align: center;
         }
 
         .store-card .store-name {
-            font-size: .78rem;
+            font-size: .76rem;
             font-weight: 600;
             color: var(--ocean);
             line-height: 1.3;
@@ -203,10 +434,11 @@
             color: var(--sky);
         }
 
+        /* ── MAP ── */
         .map-wrap {
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, .1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .1);
         }
 
         .map-wrap iframe {
@@ -216,17 +448,26 @@
             display: block;
         }
 
+        /* ── FOOTER ── */
         footer {
-            background: #e8f4fb;
-            color: var(--text);
+            background: #0f2e45;
+            color: rgba(255, 255, 255, .65);
             padding: 2rem 0;
-            font-size: .9rem;
-            border-top: 1px solid #cce4f4;
+            font-size: .88rem;
+            text-align: center;
         }
 
         footer small {
-            color: #6c757d;
-            font-size: .8rem;
+            font-size: .78rem;
+            color: rgba(255, 255, 255, .4);
+        }
+
+        footer .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: .5rem;
+            display: block;
         }
 
         .section-divider {
@@ -240,15 +481,16 @@
 
 <body data-bs-spy="scroll" data-bs-target="#moaNav" data-bs-offset="80" tabindex="0">
 
-    <nav class="navbar navbar-expand-lg sticky-top" id="moaNav" style="z-index:1050;">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg" id="moaNav">
         <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand mb-0">SM Mall of Asia</a>
+            <a class="navbar-brand mb-0" href="#hero">SM Mall of Asia</a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#moaNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="moaNavbar">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#attractions">Attractions</a></li>
                     <li class="nav-item"><a class="nav-link" href="#shopping">Shopping</a></li>
                     <li class="nav-item"><a class="nav-link" href="#dining">Dining</a></li>
@@ -258,28 +500,80 @@
         </div>
     </nav>
 
+    <!-- HERO (FULLSCREEN) -->
+    <section id="hero" style="padding:0;">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Pasay City · Metro Manila · Philippines</p>
+            <h1 class="hero-title">SM Mall<br>of <span>Asia</span></h1>
+            <p class="hero-sub">One of the biggest lifestyle destinations in the world — world-class shopping, dining,
+                and entertainment along the scenic Manila Bay.</p>
+            <div class="hero-ctas">
+                <a href="#attractions" class="btn-hero-primary">Explore Attractions</a>
+                <a href="#visit-us" class="btn-hero-ghost">Plan Your Visit</a>
+            </div>
+        </div>
+        <div class="hero-scroll-hint">
+            <span>Scroll</span>
+            <div class="arrow"></div>
+        </div>
+    </section>
+
+    <!-- STAT STRIP -->
+    <div class="stat-strip">
+        <div class="container">
+            <div class="row g-3 justify-content-center">
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-num">400+</div>
+                        <div class="stat-label">Retail Stores</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-num">20K</div>
+                        <div class="stat-label">Arena Capacity</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-num">5,000</div>
+                        <div class="stat-label">Parking Slots</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-num">1M+</div>
+                        <div class="stat-label">Monthly Visitors</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT -->
     <section id="about" style="background: var(--sand);">
         <div class="container">
-            <div class="row g-5 align-items-start">
+            <div class="row g-5 align-items-center">
                 <div class="col-lg-6">
                     <img src="moa-out.jpg" alt="SM MoA" class="about-img">
                 </div>
                 <div class="col-lg-6">
-                    <h2>SM Mall of Asia</h2>
-                    <p class="text-muted mb-3" style="font-size:.9rem;">Pasay City, Metro Manila</p>
-                    <p>SM Mall of Asia, or SM MoA, is one of the biggest lifestyle destinations in the Philippines.
-                        Located along the scenic Manila Bay in Pasay City, it is known for its world-class shopping,
-                        dining, and entertainment experiences. Once the largest mall in the country, it remains one of
-                        the biggest in the world and continues to attract millions of visitors every year.</p>
+                    <h2>About SM MoA</h2>
+                    <p class="text-muted mb-3"
+                        style="font-size:.85rem; letter-spacing:.06em; text-transform:uppercase;">Pasay City, Metro
+                        Manila</p>
+                    <p>SM Mall of Asia is one of the biggest lifestyle destinations in the Philippines, located along
+                        the scenic Manila Bay. Once the largest mall in the country, it remains one of the biggest in
+                        the world, attracting millions of visitors every year.</p>
                     <p>The mall features four interconnected buildings with retail stores, restaurants, cafés, and
-                        attractions. It also offers one of the largest parking facilities in the country, accommodating
-                        around five thousand vehicles.</p>
-                    <p>Inside, visitors can enjoy the first IMAX Theatre in the Philippines, the Director's Club for
-                        premium cinema viewing, and the country's first Olympic-sized ice skating rink — also the
-                        largest in Southeast Asia.</p>
-                    <p>Just beside the mall stands the SM Mall of Asia Arena, a state-of-the-art indoor venue holding up
-                        to 20,000 people. Opened in 2012, it has hosted major sports events, concerts, and international
-                        artists. The arena was also upgraded for the 2023 FIBA Basketball World Cup.</p>
+                        attractions, alongside one of the largest parking facilities in the country accommodating around
+                        five thousand vehicles.</p>
+                    <p>Visitors can enjoy the first IMAX Theatre in the Philippines, the Director's Club premium cinema,
+                        and the country's first Olympic-sized ice skating rink — also the largest in Southeast Asia.</p>
+                    <p>Adjacent to the mall, the SM Mall of Asia Arena holds up to 20,000 people and has hosted major
+                        concerts, sports events, and the 2023 FIBA Basketball World Cup.</p>
                 </div>
             </div>
         </div>
@@ -287,6 +581,7 @@
 
     <hr class="section-divider">
 
+    <!-- ATTRACTIONS -->
     <section id="attractions">
         <div class="container">
             <div class="row mb-4">
@@ -365,6 +660,7 @@
 
     <hr class="section-divider">
 
+    <!-- SHOPPING -->
     <section id="shopping" style="background: var(--sand);">
         <div class="container">
             <div class="row mb-4">
@@ -620,6 +916,7 @@
 
     <hr class="section-divider">
 
+    <!-- DINING -->
     <section id="dining">
         <div class="container">
             <div class="row mb-4">
@@ -784,12 +1081,12 @@
                         <div class="store-name">CHATRAMUE</div>
                     </div>
                 </div>
-                <div class="store-card"><img src="dining/chef-tony.png" alt="CHEF TONYS POPCORN">
+                <div class="store-card"><img src="dining/chef-tony.png" alt="CHEF TONY'S POPCORN">
                     <div class="store-body">
                         <div class="store-name">CHEF TONY'S POPCORN</div>
                     </div>
                 </div>
-                <div class="store-card"><img src="dining/chilis.jpg" alt="CHILIS">
+                <div class="store-card"><img src="dining/chilis.jpg" alt="CHILI'S">
                     <div class="store-body">
                         <div class="store-name">CHILI'S</div>
                     </div>
@@ -834,7 +1131,7 @@
                         <div class="store-name">CONGO GRILLE</div>
                     </div>
                 </div>
-                <div class="store-card"><img src="dining/contis.jpg" alt="CONTIS BAKESHOP AND RESTAURANT">
+                <div class="store-card"><img src="dining/contis.jpg" alt="CONTIS BAKESHOP">
                     <div class="store-body">
                         <div class="store-name">CONTIS BAKESHOP</div>
                     </div>
@@ -889,12 +1186,12 @@
                         <div class="store-name">FAMOUS BELGIAN WAFFLES</div>
                     </div>
                 </div>
-                <div class="store-card"><img src="dining/fiery-style.jpg" alt="FIERY STYLE">
+                <div class="store-card"><img src="dining/fiery-style.jpg" alt="FIERY STYLE FLAMING GRILL">
                     <div class="store-body">
                         <div class="store-name">FIERY STYLE FLAMING GRILL</div>
                     </div>
                 </div>
-                <div class="store-card"><img src="dining/frankies.png" alt="FRANKIES NEW YORK BUFFALO WINGS">
+                <div class="store-card"><img src="dining/frankies.png" alt="FRANKIES NY BUFFALO WINGS">
                     <div class="store-body">
                         <div class="store-name">FRANKIES NY BUFFALO WINGS</div>
                     </div>
@@ -925,6 +1222,7 @@
 
     <hr class="section-divider">
 
+    <!-- VISIT US -->
     <section id="visit-us" style="background: var(--sand);">
         <div class="container">
             <div class="row mb-4">
@@ -945,13 +1243,18 @@
         </div>
     </section>
 
-    <footer class="text-center">
-        <p class="mb-0">&copy; 2025 Justine Weslley. All content is for educational purposes.</p>
-        <small>Images and information © SM Supermalls. | Other images sourced online</small>
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <span class="brand">SM Mall of Asia</span>
+            <p class="mb-1">&copy; 2025 Justine Weslley. All content is for educational purposes.</p>
+            <small>Images and information © SM Supermalls. | Other images sourced online</small>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Navbar active link tracking
         const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
             link.addEventListener('click', function () {
@@ -959,6 +1262,27 @@
                 this.classList.add('active');
             });
         });
+
+        // Navbar scroll shadow
+        const navbar = document.getElementById('moaNav');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 40);
+        });
+
+        // Scrollspy: update active nav link based on section in view
+        const sections = document.querySelectorAll('section[id], div[id]');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(l => {
+                        l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        }, { rootMargin: '-40% 0px -55% 0px' });
+
+        sections.forEach(s => observer.observe(s));
     </script>
 </body>
 
